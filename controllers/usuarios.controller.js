@@ -1,12 +1,14 @@
-const mysql = require("../mysql");
+const mysql = require("../routes/mysql");
 
 exports.atualizarUsuario = async (req, res) => {
     try {
         const idUsuarios = Number(req.params.id);
         const resultado = await mysql.execute(
             `UPDATE users
-             SET name = ?, email = ?, password = ?
-             WHERE id = ?`,
+             SET name = ?, 
+                 email = ?, 
+                 password = ?
+                 WHERE id = ?`,
             [
                 req.body.name,
                 req.body.email,
