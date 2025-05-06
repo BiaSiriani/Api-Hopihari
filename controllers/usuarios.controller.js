@@ -50,9 +50,19 @@ exports.cadastro = async (req, res) => {
         res.status(500).send({ mensagem: error.message });
     }
 };
+
 exports.login = async () =>{
     try{
-    } catch (error){
+        const usuario = await mysql.execute(
+            `SELECT * FROM users WHERE email = ?`,
+            [req.body.email]);
+        console.log(usuario);
 
+        if(usuario == 0){
+            return res.status(401).send({"Mensagem": "Usuario não cadastrado"});
+        }
+
+    } catch (error){
+        return res.status(500).send({ "Error" : error })
     }
 }
