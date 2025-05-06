@@ -1,45 +1,34 @@
-const express = require('express');
-const router = express.Router();
+const express = require("express");
+const app = express();
+const cors = require("cors");
+const helmet = require("helmet");
+const bodyParser = require("body-parser");
 
-// Banco de dados falso (na memória)
-let usuarios = [];
+const usuariosRoute = require("./routes/login.route")
 
-// Rota de cadastro (POST /usuarios/cadastro)
-router.post('/cadastro', (req, res) => {
-    const { nome, email, senha } = req.body;
 
-    if (!nome || !email || !senha) {
-        return res.status(400).json({ mensagem: "Todos os campos são obrigatórios!" });
+app.use(cors());
+app.use(helmet());
+
+app.use(bodyParser.urlencoded({extended: false}));
+app.use(bodyParser.json());
+
+
+app.use((req, res, next) => {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header(
+        "Access-Control-Allow-Headers",
+        "Origin, X-Requested-With, Content-Type, Accept, Authorization"
+    );
+    if (req.method === 'OPTIONS') {
+        res.header("Access-Control-Allow-Methods", "PUT, POST, GET, PATCH, DELETE");
+
     }
-
-    const novoUsuario = { id: usuarios.length + 1, nome, email, senha };
-    usuarios.push(novoUsuario);
-
-    res.status(201).json({
-        mensagem: "Usuário cadastrado com sucesso!",
-        dados: novoUsuario
-    });
+    next();
 });
 
-// Rota de atualização (PUT /usuarios/:id)
-router.put('/cadastro/:id', (req, res) => {
-    const { id } = req.params;
-    const { nome, email, senha } = req.body;
+app.use("/usuarios", usuariosRoute);
 
-    const usuario = usuarios.find(u => u.id === parseInt(id));
 
-    if (!usuario) {
-        return res.status(404).json({ mensagem: "Usuário não encontrado!" });
-    }
 
-    if (nome) usuario.nome = nome;
-    if (email) usuario.email = email;
-    if (senha) usuario.senha = senha;
-
-    res.status(200).json({
-        mensagem: "Usuário atualizado com sucesso!",
-        dados: usuario
-    });
-});
-
-module.exports = router;
+module.exports = app;
