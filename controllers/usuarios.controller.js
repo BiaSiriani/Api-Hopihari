@@ -1,4 +1,4 @@
-const mysql = require("../mysql");
+const mysql = require("../routes/mysql");
 
 exports.atualizarUsuario = async (req, res) => {
     try {
