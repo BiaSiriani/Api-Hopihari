@@ -1,4 +1,6 @@
 const mysql = require('../mysql'); // ajuste o caminho se necessário
+const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
 
 // Atualizar usuário
 exports.atualizarUsuario = async (req, res) => {
@@ -48,3 +50,9 @@ exports.cadastro = async (req, res) => {
         res.status(500).send({ mensagem: error.message });
     }
 };
+exports.login = async () =>{
+    try{
+    } catch (error){
+
+    }
+}
