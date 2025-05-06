@@ -62,6 +62,10 @@ exports.login = async () =>{
             return res.status(401).send({"Mensagem": "Usuario não cadastrado"});
         }
 
+      const match = await  bcrypt.compare(usuario[0].password,req.body.password)
+      console.log(match);
+      return
+
     } catch (error){
         return res.status(500).send({ "Error" : error })
     }
