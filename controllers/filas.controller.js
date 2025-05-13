@@ -19,7 +19,7 @@ exports.verificarBrinquedos = async(req, res,next)=>{
 exports.entrarFila = async (req, res) => {
     try{
 const resultado = await mysql.execute(
-        'INSERT INTO lines (user_id,atracoes_id)   VALUES (?,?)',
+        'INSERT INTO hopi_hari_db.lines (user_id,atracoes_id)   VALUES (?,?)',
         [ res.locals.idUsuario, Number (req.params.atracoes_id)]);
  return res.status(201).send({ "mensagem": resultado});
     } catch(error){
