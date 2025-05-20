@@ -1,7 +1,7 @@
 const mysql = require('../routes/mysql');
 
 
-exports.brinquedosRoute = async (req, res) => {
+exports.cadastroBrinquedos = async (req, res) => {
 
 try{
 
