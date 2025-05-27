@@ -8,5 +8,6 @@ router.post('/',
     login.userRequired,
     brinquedosController.cadastroBrinquedos
 );
+router.get('/all/:areaName', login.required);
 
 module.exports = router;

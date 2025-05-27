@@ -1,3 +1,10 @@
+INSERT INTO areas (name) VALUES 
+("Kaminda"),
+("Wild West"),
+("Infantasia"),
+("Aribabiba"),
+("Mistieri");
+
 -- Cine 180 - Kaminda
 INSERT INTO users_has_atracoes(name, waiting_time, status, area, id_areas)
 VALUES ("Cine 180", 2, "Aberto", "Kaminda", (SELECT id FROM areas WHERE nome = "Kaminda"));
